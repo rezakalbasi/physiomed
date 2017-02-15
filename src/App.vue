@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <select>
+    <select class="js-select" v-on:change="callToAPI">
       <option v-for="person in people">
         {{ person.name }}
       </option>
@@ -26,6 +26,13 @@ export default {
       }, {
         name: "Weinstein"
       }]
+    };
+  },
+  methods: {
+    callToAPI(a) {
+      const select = document.querySelector(".js-select");
+
+      alert(`Call to API for ${select.value}. API implementation soon.`);
     }
   }
 }
