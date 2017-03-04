@@ -8,10 +8,10 @@
       <md-layout v-if="pageNumber === 1" >
         <md-layout>
           <md-input-container>
-            <label for="person">Person</label>
-            <md-select name="person" placeholder="Please choose a model" v-model="person">
-              <md-option v-bind:value="person.name" v-for="person in people">
-                {{ person.name }}
+            <label for="cellml">CellML Model</label>
+            <md-select name="cellml" placeholder="Please choose a model" v-model="cellml">
+              <md-option v-bind:value="cellml.name" v-for="cellml in models">
+                {{ cellml.name }}
 
               </md-option>
             </md-select>
@@ -23,7 +23,7 @@
             </md-card-header>
 
             <md-card-content>
-              {{ person }}
+              {{ cellml }}
             </md-card-content>
           </md-card>
         </md-layout>
@@ -170,7 +170,7 @@
     name: 'app',
     data() {
       return {
-        people: [{
+        models: [{
           name: "chang_fujita_1999-semgen.cellml"
         }, {
           name: "chang_fujita_b_1999-semgen.cellml"
@@ -186,16 +186,16 @@
           name: "weinstein_1995-semgen.cellml"
         }],
         responseBody: [],
-        person: null,
+        cellml: null,
         cp: null,
-        placeholder: this.person ? 'Call API for ' + this.person : 'No one is selected yet',
+        placeholder: this.cellml ? 'Call API for ' + this.cellml : 'No one is selected yet',
         pageNumber: 1
       };
     },
     watch: {
-      person: function (person) {
+      cellml: function (cellml) {
         var formData = new FormData();
-        formData.append('cellml', `https://models.physiomeproject.org/workspace/267/rawfile/240aec39cbe4a481af115b02aac83af1e87acf2e/semgen-annotation/${person}`);
+        formData.append('cellml', `https://models.physiomeproject.org/workspace/267/rawfile/240aec39cbe4a481af115b02aac83af1e87acf2e/semgen-annotation/${cellml}`);
         this.$http.post('http://127.0.0.1:5000/pmr', formData).then(response => {
           this.responseBody = response.body;
         });
