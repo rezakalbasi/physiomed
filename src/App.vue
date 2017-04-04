@@ -83,27 +83,38 @@
 
 
 
-      <md-layout md-gutter v-if="pageNumber === 2">
+<md-layout md-gutter v-if="pageNumber === 2">
 
-<!--div id="local-search1">
-  <p>{{ message2 }}</p>
-  http://purl.obolibrary.org/obo/CHEBI_17996
-</div-->
-
-        <md-layout md-align="center end">
+   <md-layout md-align="center end">
+       <h2>   Computational Model Annotations </h2>
           <md-list>
             <md-list-item v-for="(response,u) in a">
               <span style="margin-right: 20px">
-
-               {{ a[u] }}   
-                <a  v-bind:href="b[u]" target="_blank">[{{ b[u] }}]</a>
-              
+                   {{ a[u] }}   
+                   <a  v-bind:href="b[u]" target="_blank">[{{ b[u] }}]</a>
               </span>
               <md-checkbox class="md-primary" v-model="checkbox">
               </md-checkbox>
             </md-list-item>
           </md-list>
         </md-layout>    
+
+    <md-layout md-align="center end">
+          <md-list>
+           <h2> Ontological concept </h2>
+             <md-list-item>
+                <span style="margin-right: 20px">
+
+                  {{ message2 }}
+                  <a  v-bind:href="b[u]" target="_blank">[{{ b[u] }}]</a>
+              
+                </span>
+                <md-checkbox class="md-primary" v-model="checkbox">
+              </md-checkbox>
+            </md-list-item>
+          </md-list>
+        </md-layout>   
+       
       </md-layout>
 
 
@@ -122,6 +133,10 @@
             </md-table-header>
 
             <md-table-body>
+              <md-table-row>
+                <md-table-cell> {{ message2 }}</md-table-cell>
+                <md-table-cell></md-table-cell>
+              </md-table-row>
               <md-table-row v-for="(response,u) in a">
                 <md-table-cell>{{ a[u] }}</md-table-cell>
                 <md-table-cell></md-table-cell>
@@ -255,7 +270,6 @@
         formData.append('cellml', `https://models.physiomeproject.org/workspace/267/rawfile/240aec39cbe4a481af115b02aac83af1e87acf2e/semgen-annotation/${cellml}`);
         this.$http.post('http://127.0.0.1:5000/pmr', formData).then(response => {
           this.responseBody = response.body;
-var aaa="http://purl.obolibrary.org/obo/CHEBI_17996";
           var n;
           n= this.responseBody.length;
           var i;
