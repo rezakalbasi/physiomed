@@ -85,7 +85,7 @@
 
 <md-layout md-gutter v-if="pageNumber === 2">
 
-   <md-layout md-align="center end">
+   <md-layout md-align="center center">
        <h2>   Computational Model Annotations </h2>
           <md-list>
             <md-list-item v-for="(response,u) in a">
@@ -99,7 +99,7 @@
           </md-list>
         </md-layout>    
 
-    <md-layout md-align="center end">
+    <md-layout md-align="center end" v-if="message2 != null">
           <md-list>
            <h2> Ontological concept </h2>
              <md-list-item>
@@ -131,16 +131,18 @@
                 <md-table-head style="font-size: 22px">Clinical Term</md-table-head>
               </md-table-row>
             </md-table-header>
-
             <md-table-body>
-              <md-table-row>
+
+              <md-table-row v-if="message2 != null">
                 <md-table-cell> {{ message2 }}</md-table-cell>
                 <md-table-cell></md-table-cell>
               </md-table-row>
+
               <md-table-row v-for="(response,u) in a">
                 <md-table-cell>{{ a[u] }}</md-table-cell>
                 <md-table-cell></md-table-cell>
               </md-table-row>
+
             </md-table-body>
           </md-table>
         </md-layout>
