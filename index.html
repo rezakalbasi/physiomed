@@ -6,9 +6,51 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/node_modules/vue-material/dist/vue-material.css">
-  </head>
-  <body>
-    <div id="app"></div>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+  <script src="../build/ols-treeview.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/0.11.1/typeahead.bundle.min.js"></script>
+<script src="../build/ols-autocomplete.js"></script>
+<link rel="stylesheet" href="../css/ols-colors.css" type="text/css" />
+<link rel="stylesheet" href="../css/ols.css" type="text/css" />
+<link rel="stylesheet" href="../css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="../css/typeaheadjs.css" type="text/css"/>
+
+
+  <link rel="stylesheet" href="../css/proton/style.min.css" type="text/css" media="screen" />
+
+</head>
+
+<body>
+  <div id="app"></div>
+
+<div id="local-search1">
+  "http://purl.obolibrary.org/obo/CHEBI_17996"
+</div>
+
+
+<script>
+$(document).ready(function() {
+  var app = require("ols-treeview");
+  var instance = new app();
+ // var aaa="http://purl.obolibrary.org/obo/CHEBI_17996";
+  instance.draw($("#term-tree"), false, "CHEBI", "terms", aaa , "http://www.ebi.ac.uk/ols/", {});
+});
+</script>
+
+
+
+<script>
+ var aaa="http://purl.obolibrary.org/obo/CHEBI_17996";
+$(document).ready(function() {
+  var app = require("ols-autocomplete");
+  var instance = new app();
+  instance.start({})
+});
+</script>
+
     <script src="/dist/build.js"></script>
   </body>
 </html>
