@@ -1,15 +1,15 @@
 <template>
   <div id="app">
     <md-toolbar class="md-medium">
-      <img src="./assets/Capture.png" alt="Auckland Bioengineering Institute" height="300" width="300">
-      <img src="./assets/physiomed.png" alt="Logo" align="middle" height="300" width="300">
+      <img src="./assets/MedTechCoRE.png" alt="Logo" align="right" height="200" width="200" onclick="window.open('https://www.cmdt.org.nz/', '_blank');">
+      <img src="./assets/Capture.png" alt="Auckland Bioengineering Institute" height="300" width="300" onclick="window.open('http://www.abi.auckland.ac.nz', '_blank');">
+      <img src="./assets/physiomed.png" alt="Logo"  height="300" width="290" onclick="window.open('http://www.abi.auckland.ac.nz/people/r-kalbasi', '_blank');">
     </md-toolbar>
     <div>
       <md-layout v-if="pageNumber === 1" >
-        <md-layout>
+        <md-layout style="width:100%; height: 100%" >
           <md-input-container>
-            <label for="cellml">CellML Model</label>
-            <md-select name="cellml" placeholder="Please choose a model" v-model="cellml">
+            <md-select name="cellml" placeholder="Please choose a Computational Physiology Model" v-model="cellml">
               <md-option v-bind:value="cellml.name" v-for="cellml in models">
                 {{ cellml.name }}
 
@@ -29,64 +29,46 @@
         </md-layout>
 
 
+<md-layout>
+<md-card style="width:100%; height: 100%">
+  <md-tabs md-fixed >
+  <md-tab id="treeview" md-label="Biological Concept Ontology">
+       <div id="term-tree"    style="height:400px; width:400px; border:1px solid white;"></div> 
+  </md-tab>
 
+  <md-tab id="autosearch" md-label="Semantic Search a biological concept">
+        <div class="grid_10 omega" style="height:400px; width:300px">
+        <h4>Search a Biological Concept</h4>
+                  <form id="local-search" name="local-search" action="http://www.ebi.ac.uk/ols/search" method="get">
+                      <fieldset><div class="left">
+                          <label>
+                              <input v-model="message2" style="font-weight: normal" size="45" type="text" name="q" data-olswidget="select" data-olsontology="" data-selectpath="http://www.ebi.ac.uk/ols/" olstype="" id="local-searchbox" placeholder="Enter the term you are looking for" class="ac_input">
+                              </input>
+                          </label>
+                      </div>
+                          <div class="right">
+                              <input type="submit" value="Search" class="submit">
+                              </input>
+                          </div>
+    
+                      </fieldset>
+                  </form>
+          </div>
+  </md-tab>
 
-        <md-layout>
-          <md-card style="width: 120%">
-             
-             
-             <div id="app-6">
-                  <!--p>{{ message }}</p-->
-                  <input v-model="message">
-             </div>
-          
-          
-          
-          <div class="grid_10 omega" style="margin-left:30px">
-      <h3>Select a Computational Physiology Concept</h3>
-                <form id="local-search" name="local-search" action="http://www.ebi.ac.uk/ols/search" method="get">
-                    <fieldset><div class="left">
-                        <label>
-                            <input v-model="message2" style="font-weight: normal" size="45" type="text" name="q" data-olswidget="select" data-olsontology="" data-selectpath="http://www.ebi.ac.uk/ols/" olstype="" id="local-searchbox" placeholder="Enter the term you are looking for" class="ac_input">
-                            </input>
-                        </label>
-                    </div>
-                        <div class="right">
-                            <input type="submit" value="Search" class="submit">
-                            </input>
-                        </div>
-                    </fieldset>
-                </form>
-                <br>
-                <i>Note: This first sample demonstrates the 'select' functionality of App, just enter a term (e.g. cancer)</i>
-</div>
-            <md-card-header>              
-              <md-layout md-align="center end">
-      <div><h2>Computational Physiology Conecept Ontology</h2></div>
-      <div id="term-tree"    style="height:300px; width:400px; border:1px solid white;"></div>
-              </md-layout>
-            </md-card-header>
-          </md-card>
-        </md-layout>
-      </md-layout>
-
-
-
-
-
-
-
+      </md-tabs>
+    </md-card>   
+  </md-layout>
+</md-layout>
 
 
 <!--22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222  -->
 <!--22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222  -->
-
-
 
 <md-layout md-gutter v-if="pageNumber === 2">
 
    <md-layout md-align="center center">
-       <h2>   Computational Model Annotations </h2>
+       <h3>   Computational Model Annotations </h3>
           <md-list>
             <md-list-item v-for="(response,u) in a">
               <span style="margin-right: 20px">
@@ -101,7 +83,7 @@
 
     <md-layout md-align="center end" v-if="message2 != null">
           <md-list>
-           <h2> Ontological concept </h2>
+           <h3> Ontological concept </h3>
              <md-list-item>
                 <span style="margin-right: 20px">
 
@@ -225,11 +207,6 @@
       <md-bottom-bar-item md-icon="skip_previous" @click.native="pageNumber--" v-if="pageNumber > 1">Prev</md-bottom-bar-item>
       <md-bottom-bar-item md-icon="skip_next" @click.native="pageNumber++" v-if="pageNumber < 4">Next</md-bottom-bar-item>
     </md-bottom-bar>
-    <!--<md-card>
-    <md-card-media>
-      <img src="./assets/logo.png" alt="People">
-    </md-card-media>
-  </md-card>-->
   </div>
 </template>
 
@@ -289,9 +266,6 @@
                                           }
                    this.a.sort();
                    this.a = this.a.filter(Boolean);
-           
-           
-           
            var r;
            var q;
            var z;
@@ -303,14 +277,7 @@
                                     }
                                   }
 
-    /*      
-          var t;
-          for(t = 0; t < z; t++){
-                      this.c[t] =  this.a[t]+" ("+ this.b[t]+")";
-                      //this.c[t] = this.a[t]+"("+ this.b[t].link() +")";
-                      
-                               }
-      */    
+ 
         });
       }
     },
@@ -368,4 +335,48 @@
   a {
     color: #42b983;
   }
+
+
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+ 
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+ 
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+ 
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+ 
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+
+
+
+
+
+
 </style>

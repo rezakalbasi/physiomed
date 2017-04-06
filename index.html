@@ -9,7 +9,6 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
   <script src="../build/ols-treeview.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/0.11.1/typeahead.bundle.min.js"></script>
 <script src="../build/ols-autocomplete.js"></script>
@@ -17,26 +16,15 @@
 <link rel="stylesheet" href="../css/ols.css" type="text/css" />
 <link rel="stylesheet" href="../css/bootstrap.css" type="text/css" />
 <link rel="stylesheet" href="../css/typeaheadjs.css" type="text/css"/>
-
-
   <link rel="stylesheet" href="../css/proton/style.min.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="../css/awesomplete.css" type="text/css" />
+  <link rel="stylesheet" href="../css/OLS-graphview.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="../css/vis.min.css" type="text/css" />
 
 </head>
 
 <body>
   <div id="app"></div>
-
-
-
-<script>
-$(document).ready(function() {
-  var app = require("ols-treeview");
-  var instance = new app();
- // var aaa="http://purl.obolibrary.org/obo/CHEBI_17996";
-  instance.draw($("#term-tree"), false, "CHEBI", "terms", aaa , "http://www.ebi.ac.uk/ols/", {});
-});
-</script>
-
 
 
 <script>
@@ -45,6 +33,48 @@ $(document).ready(function() {
   var app = require("ols-autocomplete");
   var instance = new app();
   instance.start({})
+});
+</script>
+
+<script>
+/* Example 2 with some more options in networkOptions. Visoptions is still empty. Again GO ontology, but with a different term for fun */
+var tmpnetworkOptions={
+  webservice : {URL: "http://www.ebi.ac.uk/ols/api/ontologies/go/terms?iri=", OLSschema: true},
+      displayOptions : {showButtonBox:false, showInfoWindow:false, showLegend:false},
+      clusterOptions : {automaticClusterThreshold:10, parentClusterSymbole:"eclipse"},
+      appearance  :   {  colorMap: ['#00dAc7','#00fBb3'],
+      maxLabelLength :5
+    },
+  rootNode:{
+      color:{
+            border: '#A0A0FF',
+            background: '#00AAF0',
+          highlight: {
+            border: '#00AAF0',
+            background: '#00AAF1'},
+          hover: {
+              border: '#00AA4F',
+              background: '#00AA4F'    }
+            },
+      rootMass: 6,
+      connectingEdges: {
+          color:  "#AA00AA",
+          width:10 },
+    }
+    }
+    //Now we look for "cell part" in GO
+    var term='http://purl.obolibrary.org/obo/GO_0031012'
+var app = require("ols-graphview");
+var instance = new app();
+instance.visstart("ontology_vis", term, tmpnetworkOptions,{})
+</script>
+
+<script>
+$(document).ready(function() {
+  var app = require("ols-treeview");
+  var instance = new app();
+ // var aaa="http://purl.obolibrary.org/obo/CHEBI_17996";
+  instance.draw($("#term-tree"), false, "CHEBI", "terms", aaa , "http://www.ebi.ac.uk/ols/", {});
 });
 </script>
 
