@@ -2,17 +2,16 @@
 
 > A Vue.js project
 
-## Build Setup
+1. Install Node.js from https://nodejs.org/en/download/
 
-``` bash
-# install dependencies
-npm install
+2. in VS code, add PhysioMed folder
 
-# serve with hot reload at localhost:8080
-npm run dev
+3. Add required plugins npm, node ect.
 
-# build for production with minification
-npm run build
-```
+4. Run: "npm install"
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+5. build for production with minification: "npm run build"
+
+6. serve with hot reload at localhost:8080
+"npm run dev"
+
